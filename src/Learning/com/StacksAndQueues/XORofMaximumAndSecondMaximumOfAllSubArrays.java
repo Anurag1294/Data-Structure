@@ -14,20 +14,20 @@ public class XORofMaximumAndSecondMaximumOfAllSubArrays {
         int N = A.size();
         Stack<Integer> S = new Stack<>();
         int Result=0;
-        for(int i=0;i<N;i++){
+            for(int i=0;i<N;i++){
 
-            while (!S.empty()){
+                while (!S.empty()){
+                    //Store the maximum XOR
+                    Result = Math.max(Result, A.get(S.peek())^A.get(i));
+                    // If Current Element is less than Top of stack break from loop
+                    if (A.get(S.peek()) > A.get(i)) break;
+                    // else remove the small element
+                    S.pop();
 
-                Result = Math.max(Result, A.get(S.peek())^A.get(i));
-
-                if (A.get(S.peek()) > A.get(i)) break;
-
-                S.pop();
-
+                }
+                // Push every element
+                S.push(i);
             }
-
-            S.push(i);
-        }
         return Result;
     }
 }
